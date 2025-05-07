@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "684501644886",
+    "project_id": "tourism-e5438",
+    "storage_bucket": "tourism-e5438.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684501644886:android:959d339bd818b8d5e12df7",
+        "android_client_info": {
+          "package_name": "com.example.wanderlust"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXHkpE9XKOTB6fKNKyQQxhoMgGwkzbBgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
