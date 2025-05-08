@@ -41,7 +41,8 @@ flutter run
 - 🧳 Profile management
 - 🗺️ Search & Filter functionality
 
----![wanderlust1](https://github.com/user-attachments/assets/9cea2c4f-016f-4ae3-bcb5-98a8c2a44263)
+![tourism1](https://github.com/user-attachments/assets/21ade8da-943b-427f-8c5e-c8076b8e212e)
 
+![tourism2](https://github.com/user-attachments/assets/5b1ed8e1-b4a2-4034-bd1b-eb3054eee7e2)
 
-![wanderlust2](https://github.com/user-attachments/assets/5ef27e5a-a470-4869-b5c8-c0f92cff2fcf)
+![tourism3](https://github.com/user-attachments/assets/ec543ae9-97b0-42aa-8259-1b88d3a4294d)
