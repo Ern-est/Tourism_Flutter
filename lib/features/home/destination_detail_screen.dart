@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:wanderlust/features/bookings/bookings_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:wanderlust/features/bookings/booking_controller.dart';
 import '../../../app/theme/colors.dart';
 import '../../../app/theme/text_styles.dart';
+import '../../../models/booking.dart';
 
 class DestinationDetailsScreen extends StatefulWidget {
   final String image;
@@ -93,7 +95,7 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen> {
                   const SizedBox(width: 10),
                   Text(
                     "Selected Date: ${DateFormat('yMMMd').format(selectedDate)}",
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   IconButton(
                     icon: const Icon(Icons.date_range, color: Colors.white),
@@ -101,10 +103,10 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen> {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: selectedDate,
-                        firstDate: DateTime(2000),
+                        firstDate: DateTime.now(),
                         lastDate: DateTime(2101),
                       );
-                      if (pickedDate != null && pickedDate != selectedDate) {
+                      if (pickedDate != null) {
                         setState(() {
                           selectedDate = pickedDate;
                         });
@@ -125,7 +127,7 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen> {
                   const SizedBox(width: 10),
                   Text(
                     "Number of People: $numberOfPeople",
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   IconButton(
                     icon: const Icon(Icons.add, color: Colors.white),
@@ -154,29 +156,26 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen> {
             Center(
               child: ElevatedButton.icon(
                 onPressed: () {
-                  // Navigate back to the HomeScreen with the booking details
-                  Navigator.pop(context);
-
-                  // Add the booking details directly to the BookingScreen list
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => BookingScreen(
-                            bookings: [
-                              {
-                                'image': widget.image,
-                                'name': widget.name,
-                                'date': selectedDate,
-                                'numberOfPeople': numberOfPeople,
-                              },
-                            ],
-                          ),
-                    ),
+                  // Add booking to provider
+                  final booking = Booking(
+                    image: widget.image,
+                    name: widget.name,
+                    date: selectedDate,
+                    numberOfPeople: numberOfPeople,
                   );
+                  Provider.of<BookingProvider>(
+                    context,
+                    listen: false,
+                  ).addBooking(booking);
+
+                  // Go back to previous screen (Home)
+                  Navigator.pop(context);
                 },
                 icon: const Icon(Icons.check),
-                label: const Text('Book Now'),
+                label: const Text(
+                  'Book Now',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   padding: const EdgeInsets.symmetric(

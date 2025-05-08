@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wanderlust/features/bookings/booking_controller.dart';
 import '../home/home_screen.dart';
 import '../bookings/bookings_screen.dart';
 import '../profile/profile_screen.dart';
@@ -14,17 +16,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
-  // This will hold the list of bookings
-  List<Map<String, dynamic>> bookings = [
-    // Sample booking data for demonstration
-    {
-      'image': 'assets/sample_image.jpg',
-      'name': 'Paris',
-      'date': DateTime.now(),
-      'numberOfPeople': 2,
-    },
-  ];
-
   final List<Widget> pages = [];
 
   @override
@@ -32,13 +23,17 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     pages.addAll([
       HomeScreen(),
-      BookingScreen(bookings: bookings),  // Pass bookings dynamically
+      // Use BookingProvider to manage bookings dynamically
+      BookingScreen(),
       ProfileScreen(),
     ]);
   }
 
   @override
   Widget build(BuildContext context) {
+    // Watch for changes in the BookingProvider
+    final bookings = Provider.of<BookingProvider>(context).bookings;
+
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
